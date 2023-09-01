@@ -6,13 +6,14 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import pandas as pd
+import numpy as np 
 
+options = webdriver.EdgeOptions()
+options.add_experimental_option('detach',True)
+driver = webdriver.Edge(options=options)
 url = 'https://www.adducation.info/general-knowledge-travel-and-transport/emergency-numbers/'
-path= '/Users/Mubaraq/Documents/chromedriver'
 
 
-service=Service(executable_path=path)
-driver=webdriver.Chrome(service=service)
 driver.get(url)
 driver.maximize_window()
 driver.implicitly_wait(10)
@@ -63,6 +64,8 @@ for i,j in zip(containers,P):
         Calling_codes.append(G)
         Local_emergency_no.append(H)
 
+driver.quit()
+
 dict_={'Country' : Country,
     'Emergency' : Emergency, 
     'Police' : Police, 
@@ -73,8 +76,22 @@ dict_={'Country' : Country,
     'Local_emergency_no' : Local_emergency_no
     }
 
+
+#Data Wrangling 
 Emergency_DS = pd.DataFrame(dict_)
 Emergency_DS.replace('','-',inplace = True)
-print(Emergency_DS)
 
+Emergency_DS['alpha-2 code']=np.nan
+Emergency_DS['Countries']=np.nan
+Emergency_DS['Continental Region']=np.nan
+
+Emergency_DS['alpha-2 code']=Emergency_DS['Country'].str[0:2]
+Emergency_DS['Countries']=Emergency_DS['Country'].str[3:]
+Emergency_DS['Continental Region']=Emergency_DS['Continent']
+Emergency_DS.drop(['Country'],axis=1)
+
+Emergency_DS=Emergency_DS[['alpha-2 code','Countries', 'Emergency', 'Police', 'Ambulance',
+       'Fire', 'Continental Region', 'Calling_codes', 'Local_emergency_no',]]
+
+Emergency_DS.to_csv('Emergency_Scraper.csv')
 
