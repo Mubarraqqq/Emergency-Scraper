@@ -4,7 +4,7 @@ A Web Scraping and Automation Project that provides a list of emergency numbers 
 - I am done with the Data manipulation and Wrangling process.
 - I am currently planning on commencing the Automation process using OS ;)
 - I would also augment Google sheets API integration that would preview the csv file in xlxs format for easy access to the data. A link to the google sheet would be attach here to the ReadMe file.
-- More on API integration would be done, perhaps brilliant automation/ parsing techniques, say user-centric preference. idk. Maybe augment chatgpt api with it  Let's see. :)
+- More on API integration would be done, perhaps brilliant automation/ parsing techniques, say user-centric preference. idk. Maybe augment chatgpt api coupled with it's LLM to make it more intelligent  
 
 ## About
 - I was able to scrape the data from a compilation list set by [Joe Connor](https://www.adducation.info/profile/joe-connor/) on this [Webpage](https://www.adducation.info/general-knowledge-travel-and-transport/emergency-numbers/).
